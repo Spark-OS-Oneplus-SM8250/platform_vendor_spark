@@ -98,6 +98,10 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 TARGET_SCREEN_WIDTH ?= 1080
 TARGET_SCREEN_HEIGHT ?= 1920
 
+# IORap app launch prefetching using Perfetto traces and madvise
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.iorapd.enable=true
+
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
