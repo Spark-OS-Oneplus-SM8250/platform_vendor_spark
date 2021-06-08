@@ -102,6 +102,11 @@ TARGET_SCREEN_HEIGHT ?= 1920
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.iorapd.enable=true
 
+# Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
+# on supported devices with Deep Press input classifier HALs and models
+PRODUCT_PRODUCT_PROPERTIES += \
+	ro.input.video_enabled=false
+
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
