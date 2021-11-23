@@ -107,8 +107,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
 	ro.input.video_enabled=false
 
+# ART
 # Optimize everything for preopt
 PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
+# Don't preopt prebuilts
 DONT_DEXPREOPT_PREBUILTS := true
 
 ifeq ($(TARGET_SUPPORTS_64_BIT_APPS), true)
@@ -121,6 +123,17 @@ endif
 ifneq ($(USE_PIXEL_CHARGER),false)
 PRODUCT_PACKAGES += \
     product_charger_res_images
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.boot=verify \
+    pm.dexopt.first-boot=quicken \
+    pm.dexopt.install=speed-profile \
+    pm.dexopt.bg-dexopt=everything
+
+ifneq ($(AB_OTA_PARTITIONS),)
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.ab-ota=quicken
+endif
 endif
 
 ifneq ($(TARGET_DISABLE_EPPE),true)
